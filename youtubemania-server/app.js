@@ -9,6 +9,7 @@ const corsOptions = {
     origin: 'https://youtube-mania.vercel.app',
   };
 app.use(cors(corsOptions));
+app.use(express.json()); // To parse JSON payloads
 app.get("/", (req, res) => res.send("Express on Vercel 1"));
 app.use('/video', videoRouter);
 
