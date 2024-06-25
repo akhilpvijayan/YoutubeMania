@@ -1,0 +1,124 @@
+<div
+  class="min-h-screen transition-colors duration-300"
+  [ngClass]="darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'"
+>
+  <div class="container mx-auto px-4">
+    <header class="py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <span class="text-blue-500">Youtube</span>Mania
+      </div>
+      <button
+        (click)="toggleDarkMode()"
+        class="p-2 rounded-full transition-colors duration-300"
+        [ngClass]="darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'"
+      >
+        <span class="sr-only">Toggle dark mode</span>
+        <svg
+          *ngIf="darkMode"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+          />
+        </svg>
+        <svg
+          *ngIf="!darkMode"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          />
+        </svg>
+      </button>
+    </header>
+
+    <main class="mt-10">
+      <h1 class="text-4xl font-bold text-center mb-6">
+        Video Downloader
+      </h1>
+      <p class="text-center mb-8">
+        Enter the URL of the video you want to download
+      </p>
+
+      <div class="max-w-xl mx-auto mt-10">
+        <div
+          class="flex rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl"
+          [ngClass]="darkMode ? 'bg-gray-800' : 'bg-white'"
+        >
+          <select
+            [(ngModel)]="selectedFormat"
+            class="px-4 py-3 rounded-l-lg focus:outline-none transition-all duration-300"
+            [ngClass]="
+              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+            "
+          >
+            <option value="MP4">MP4</option>
+            <option value="MP3">MP3</option>
+            <option value="AVI">AVI</option>
+            <option value="MKV">MKV</option>
+          </select>
+          <input
+            type="text"
+            [(ngModel)]="youtubeUrl"
+            placeholder="https://example.com/video"
+            class="flex-grow px-4 py-3 focus:outline-none transition-all duration-300"
+            [ngClass]="
+              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+            "
+          />
+          <button
+            (click)="onDownload()"
+            class="px-4 py-3 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none transition-all duration-300 transform hover:scale-105"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+          </button>
+        </div>
+        <div *ngIf="isDownloading" class="w-full bg-gray-200 mt-4">
+          <div
+            [style.width.%]="progress"
+            class="h-1 bg-blue-600 transition-all duration-300"
+          ></div>
+        </div>
+        <div class="text-2s font-bold text-center mt-4" *ngIf="isDownloading">
+          <span class="text-blue-500">Downloading...</span>
+        </div>
+        <div
+          *ngIf="videoUrl"
+          class="mt-4 w-full max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden"
+        >
+          <video controls class="w-full h-48">
+            <source [src]="videoUrl" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
