@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "archiver": "^7.0.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "ytdl-core": "^4.11.5"
